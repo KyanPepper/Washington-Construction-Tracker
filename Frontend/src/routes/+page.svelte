@@ -1,10 +1,12 @@
 <script>
   import NavBar from "$lib/NavBar.svelte";
-
+  import '../app.css';
   </script>
-  
-  <slot />
-<h1 class="font-bold divide-white">Welcome to Washington construction projects</h1>
+  <nav>
 <NavBar>
 
 </NavBar>
+  </nav>
+
+
+<h1 class="mix-blend-color to-red-700" >Welcome to Washington construction projects</h1>
