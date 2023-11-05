@@ -9,7 +9,9 @@
   <NavBar>
     </NavBar>
   </header>
-  <Page>
+
+  
+<Page>
 </Page>
 
 

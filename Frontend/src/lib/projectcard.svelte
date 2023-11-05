@@ -14,8 +14,8 @@
       <p class="mt-1 text-sm text-gray-500">DETAILS</p>
       <div class="mt-4">
         <p class="text-gray-500 text-sm">
-          <span class="mr-2">Time: 2 hours</span>
-          <span>Money: $50</span>
+          <span class="mr-2">Days since started: </span>
+          <span>Money invested:</span>
         </p>
       </div>
     </div>
