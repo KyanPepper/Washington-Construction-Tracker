@@ -3,16 +3,12 @@
     import '../app.css';
     import Page from "./+page.svelte";
     </script>
-  
   <header>
-
   <NavBar>
     </NavBar>
   </header>
 
-  
-<Page>
-</Page>
+  <slot></slot>
 
 
 
