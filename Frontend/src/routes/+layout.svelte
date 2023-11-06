@@ -7,13 +7,7 @@
   <NavBar>
     </NavBar>
   </header>
-
+<div>
   <slot></slot>
+</div>
 
-
-
-<style global lang="postcss">
-	:global(body) {
-		background-color:  #f2f2f2;
-	}
-</style>
