@@ -15,9 +15,16 @@
     onMount(async () => {
         if(browser) {
             const leaflet = await import('leaflet');
-
-            map = leaflet.map(mapElement).setView([51.505, -0.09], 13);
-
+			//bounds at washinton
+           const washingtonBounds = leaflet.latLngBounds(
+				leaflet.latLng(44, -125.5),
+                leaflet.latLng(49.5, -116.0) 
+            );
+			map = leaflet.map(mapElement, {
+                maxBounds: washingtonBounds, 
+                maxBoundsViscosity: 1.0,      
+				minZoom:2
+            }).setView([47.7511, -120.7401], 7);
             leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
