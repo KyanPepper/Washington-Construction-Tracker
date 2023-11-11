@@ -1,55 +1,49 @@
-<script lang="ts">
-	import { onMount, onDestroy, setContext, createEventDispatcher, tick } from 'svelte';
-	import L from 'leaflet';
-	import 'leaflet/dist/leaflet.css';
+<script>
+    import { onMount, onDestroy } from 'svelte';
+    import { browser } from '$app/environment';
 
-	export let bounds: L.LatLngBoundsExpression | undefined = undefined;
-	export let view: L.LatLngExpression | undefined = undefined;
-	export let zoom: number | undefined = undefined;
+    /**
+   * @type {string | HTMLElement}
+   */
+    let mapElement;
+    /**
+   * @type {import("leaflet").Map | import("leaflet").LayerGroup<any>}
+   */
+    let map;
 
-	const dispatch = createEventDispatcher();
+	
+    onMount(async () => {
+        if(browser) {
+            const leaflet = await import('leaflet');
 
-	let map: L.Map | undefined;
-	let mapElement: HTMLElement;
+            map = leaflet.map(mapElement).setView([51.505, -0.09], 13);
 
-	onMount(() => {
-		if (!bounds && (!view || !zoom)) {
-			throw new Error('Must set either bounds, or view and zoom.');
-		}
+            leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
 
-		map = L.map(mapElement)
-			// example to expose map events to parent components:
-			.on('zoom', (e) => dispatch('zoom', e))
-			.on('popupopen', async (e) => {
-				await tick();
-				e.popup.update();
-			});
+            leaflet.marker([51.5, -0.09]).addTo(map)
+                .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+                .openPopup();
+        }
+    });
 
-		L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-			attribution: `&copy;<a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>,&copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>`
-		}).addTo(map);
-	});
-
-	onDestroy(() => {
-		map?.remove();
-		map = undefined;
-	});
-
-	setContext('map', {
-		getMap: () => map
-	});
-
-	$: if (map) {
-		if (bounds) {
-			map.fitBounds(bounds);
-		} else if (view && zoom) {
-			map.setView(view, zoom);
-		}
-	}
+    onDestroy(async () => {
+        if(map) {
+            console.log('Unloading Leaflet map.');
+            map.remove();
+        }
+    });
 </script>
 
-<div class="w-full h-full" bind:this={mapElement}>
-	{#if map}
-		<slot />
-	{/if}
-</div>
+
+<main>
+    <div bind:this={mapElement}></div>
+</main>
+
+<style>
+    @import 'leaflet/dist/leaflet.css';
+    main div {
+        height: 800px;
+    }
+</style>

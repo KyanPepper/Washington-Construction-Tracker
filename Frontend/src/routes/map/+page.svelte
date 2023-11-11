@@ -8,7 +8,7 @@
 
 
 <div class="w-full h-full">
-    <Leaflet view={washingtonLatLng} zoom={1} >
+    <Leaflet  >
     </Leaflet>
     <h1>
       wdaqdqwd
