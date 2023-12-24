@@ -1,0 +1,2 @@
+FLASK_APP=scrape.py
+FLASK_DEBUG=1
