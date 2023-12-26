@@ -25,11 +25,17 @@ if view_content_div:
         #print(newUrl)
         subresult = requests.get(newUrl)
         subDoc = BeautifulSoup(subresult.text,"html.parser")
+        #grab title
+        title = subDoc.find("h1" ).find('span').get_text(strip=True)
         subcontentdiv = subDoc.find("div",class_ ="content")
         #print(subcontentdiv.prettify())
-        #search throught text
-        pic = subcontentdiv.find('img src')
-        print(pic)
+        #Grab piclink
+        piclink = broadUrl + subcontentdiv.find('img').get("src")
+        description = subcontentdiv.find('p').get_text(strip=True)
+        timeline = subcontentdiv.find('div',class_ = 'field field--name-field-timeline-overview-project field--type-string field--label-hidden field--item').get_text(strip=True)
+        price = subcontentdiv.find('div', class_ = 'field field--name-field-funding field--type-string field--label-hidden field--item').getText(strip=True)
+        
+           
 
         break
 
