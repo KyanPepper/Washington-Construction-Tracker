@@ -8,5 +8,5 @@ class Project(db.Model):
     price = db.Column(db.String(1000))
     timeline = db.Column(db.String(100))
     address = db.Column(db.String(255))
-    location = db.Column(db.String(255))
+    coordinates = db.Column(db.String(255))
     description = db.Column(db.String(1000))
