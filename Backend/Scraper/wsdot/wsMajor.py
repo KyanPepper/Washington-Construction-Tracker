@@ -31,14 +31,24 @@ if view_content_div:
         #print(subcontentdiv.prettify())
         #Grab piclink
         piclink = broadUrl + subcontentdiv.find('img').get("src")
+        #grab desciption
         description = subcontentdiv.find('p').get_text(strip=True)
+        #grab timeline etc..
         timeline = subcontentdiv.find('div',class_ = 'field field--name-field-timeline-overview-project field--type-string field--label-hidden field--item').get_text(strip=True)
         price = subcontentdiv.find('div', class_ = 'field field--name-field-funding field--type-string field--label-hidden field--item').getText(strip=True)
-        
+        project ={
+            'name' : title,
+            'img' : piclink,
+            'url' : newUrl,
+            'price' : price,
+            'timeline' : timeline,
+            'description' : description
+        }
            
 
-        break
+        projects.append(project)
 
 else:
     print('accsess blocked :( ')
+print(projects)
 
