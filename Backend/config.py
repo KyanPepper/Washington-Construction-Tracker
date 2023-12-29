@@ -8,5 +8,3 @@ class Config(object):
         'sqlite:///' + os.path.join(basedir, 'scrape.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     ROOT_PATH = basedir
-    STATIC_FOLDER = os.path.join(basedir, 'app//View//static')
-    TEMPLATE_FOLDER = os.path.join(basedir, 'app//View//templates')
