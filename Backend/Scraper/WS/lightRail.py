@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests 
 
-def lightrailscrape():
+def scrapelightrail():
     projects = []
 
     url = 'https://en.wikipedia.org/wiki/Link_light_rail'
@@ -18,15 +18,15 @@ def lightrailscrape():
 
     for row in rows:
         cells = row.find_all(['th', 'td'])
-        url = broadurl + cells[0].find('a').get('href')
+        newurl = broadurl + cells[0].find('a').get('href')
         title = cells[0].find('a').get_text(strip = True)
         description = cells[2].contents[0].strip()
         location = cells[3].find('a').get_text(strip = True)
         timeline = '2003 - ' + cells[7].contents[0].strip()
         project ={
                 'name' : title,
-                'img' : img,
-                'url' : url,
+                'img' : broadurl + img,
+                'url' : newurl,
                 'price' : price,
                 'timeline' : timeline,
                 'description' : description,
