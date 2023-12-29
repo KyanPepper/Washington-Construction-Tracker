@@ -29,8 +29,8 @@
                 attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            leaflet.marker([51.5, -0.09]).addTo(map)
-                .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+            leaflet.marker([47.5, -122.09]).addTo(map)
+                .bindPopup('Kyles house.')
                 .openPopup();
         }
     });
