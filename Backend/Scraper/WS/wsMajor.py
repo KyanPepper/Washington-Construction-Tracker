@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests 
+
 def scrapeWsMajor():
     projects = []
 
@@ -36,13 +37,15 @@ def scrapeWsMajor():
             #grab timeline etc..
             timeline = subcontentdiv.find('div',class_ = 'field field--name-field-timeline-overview-project field--type-string field--label-hidden field--item').get_text(strip=True)
             price = subcontentdiv.find('div', class_ = 'field field--name-field-funding field--type-string field--label-hidden field--item').getText(strip=True)
+            location = extract_from_title(title)
             project ={
                 'name' : title,
                 'img' : piclink,
                 'url' : newUrl,
                 'price' : price,
                 'timeline' : timeline,
-                'description' : description
+                'description' : description,
+                'location' : location
             }
             
 
@@ -52,3 +55,13 @@ def scrapeWsMajor():
         print('accsess blocked :( ')
     return projects
 
+def extract_from_title(title):
+    keywords = ['I-5', 'I-90', 'SR 167', 'SR 160', 'SR 522', 'SR 512', 'SR 520', 'SR 525', 'SR 529', 'Snoqualmie', 'Bellevue', 'Seattle', 'Tacoma', 'Everett', 'Kirkland', 'Spokane', 'Puget Sound', 'I-405', 'SR 18', 'SR 202', 'SR 99', 'SR 9']
+    locations = []
+
+    title_lower = title.lower()
+    for keyword in keywords:
+        if keyword.lower() in title_lower:
+            locations.append(keyword.replace('-', ' '))
+
+    return ' '.join(locations) + ' Washington' if locations else None
