@@ -42,7 +42,6 @@ def scrapesnohomish():
                 'location' : location
         }
         projects.append(project)
-        print(title)
     return projects
 
         
