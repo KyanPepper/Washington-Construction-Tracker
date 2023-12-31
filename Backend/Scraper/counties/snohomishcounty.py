@@ -17,7 +17,11 @@ def scrapesnohomish():
     for link in links:
         href = broadurl + link.get('href')
         location = link.get_text(strip=True)
-        location = re.sub(r'\s*\(\d{4}\)', '', location)
+        location_parts = location.split('-')
+        if len(location_parts) > 0:
+            location = location_parts[0]
+        location += ' Washington'
+
         newdoc = requests.get(href)
         projurl = href
         thenewdoc = BeautifulSoup(newdoc.text, 'html.parser')

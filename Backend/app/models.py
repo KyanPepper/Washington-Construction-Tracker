@@ -2,11 +2,12 @@ from app import db
 
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(1000))
-    img = db.Column(db.String(1000))
-    url = db.Column(db.String(1000))
-    price = db.Column(db.String(1000))
+    name = db.Column(db.String(100))
+    img = db.Column(db.String(100))
+    url = db.Column(db.String(200))
+    price = db.Column(db.String(100))
     timeline = db.Column(db.String(100))
-    address = db.Column(db.String(255))
-    coordinates = db.Column(db.String(255))
+    location = db.Column(db.String(200))
+    lon = db.Column(db.Float)
+    lat = db.Column(db.Float)
     description = db.Column(db.String(1000))
