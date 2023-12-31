@@ -11,3 +11,4 @@ class Project(db.Model):
     lon = db.Column(db.Float)
     lat = db.Column(db.Float)
     description = db.Column(db.String(1000))
+    county = db.Column(db.String(100))

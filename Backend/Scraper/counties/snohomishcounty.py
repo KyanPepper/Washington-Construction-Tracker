@@ -43,7 +43,8 @@ def scrapesnohomish():
                 'price' : price,
                 'timeline' : timeline,
                 'description' : description,
-                'location' : location
+                'location' : location,
+                'county' : 'Snohomish County'
         }
         projects.append(project)
     return projects
