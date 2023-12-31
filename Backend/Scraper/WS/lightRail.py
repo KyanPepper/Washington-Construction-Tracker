@@ -30,7 +30,7 @@ def scrapelightrail():
                 'price' : price,
                 'timeline' : timeline,
                 'description' : description,
-                'location' : location
+                'location' : location + ' Washington'
         }
         projects.append(project)
     
