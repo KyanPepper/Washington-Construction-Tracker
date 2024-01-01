@@ -43,8 +43,10 @@ def scrapesites():
                 longitude = float(data[0].get("lon", 0))
                 if scrape_project.get('county') == None:
                     display_name_parts = data[0].get("display_name", "").split(", ")
-                    county = display_name_parts[2] 
-                    dbProject.county = county
+                    for name in display_name_parts:
+                        if 'County' in name:
+                            county = name
+                            dbProject.county = county
                 else:
                     dbProject.county = scrape_project.get('county')
                 dbProject.lat = latitude
