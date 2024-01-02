@@ -4,6 +4,7 @@ from app.models import Project
 from flask import Flask, jsonify
 from Scraper.main import scrape_all
 import requests
+from sqlalchemy.sql.expression import func
 
 
 @app.before_request
@@ -122,3 +123,28 @@ def getSnohomish():
         for project in projects
     ]
     return jsonify(serialized_projects)
+
+
+@app.route('/getrand', methods=['GET','POST'])
+def getRandom():
+   
+    projects =  Project.query .order_by(func.random()).limit(3).all()
+    
+    serialized_projects = [
+        {
+            'id': project.id,
+            'name': project.name,
+            'img': project.img,
+            'url': project.url,
+            'price': project.price,
+            'timeline': project.timeline,
+            'location': project.location,
+            'lon': project.lon,
+            'lat': project.lat,
+            'description': project.description,
+            'county': project.county,
+        }
+        for project in projects
+    ]
+    return jsonify(serialized_projects)
+
