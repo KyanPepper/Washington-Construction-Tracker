@@ -79,3 +79,24 @@ def getMapProjects():
     ]
     
     return jsonify(serialized_projects)
+
+@app.route('/getproject<projectid>', methods=['GET','POST'])
+def getproject(projectid):
+    project = Project.query.filter_by(id=projectid).first()
+    
+    serialized_projects = [
+        {
+            'id': project.id,
+            'name': project.name,
+            'img': project.img,
+            'url': project.url,
+            'price': project.price,
+            'timeline': project.timeline,
+            'location': project.location,
+            'lon': project.lon,
+            'lat': project.lat,
+            'description': project.description,
+            'county': project.county,
+        }
+    ]
+    return jsonify(serialized_projects)
