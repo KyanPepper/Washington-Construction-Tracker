@@ -12,7 +12,7 @@
     const county: string = 'Snohomish County'
   </script>
   
-<div class="mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 lg:flex lg:items-start lg:justify-center lg:gap-x-8 lg:px-0 lg:pb-24 lg:pt-16">
+<div class="mx-auto max-w-7xl px-4 pb-4 pt-10 sm:px-6 lg:flex lg:items-start lg:justify-center lg:gap-x-8 lg:px-0 lg:pb-4 lg:pt-16">
     <!-- Image Section -->
     <div class="lg:w-2/5 lg:pr-6">
         <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
