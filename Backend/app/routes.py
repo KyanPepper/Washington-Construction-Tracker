@@ -100,3 +100,25 @@ def getproject(projectid):
         }
     ]
     return jsonify(serialized_projects)
+
+@app.route('/getsnoho', methods=['GET','POST'])
+def getSnohomish():
+    projects = Project.query.filter_by(county='Snohomish County').all()
+    
+    serialized_projects = [
+        {
+            'id': project.id,
+            'name': project.name,
+            'img': project.img,
+            'url': project.url,
+            'price': project.price,
+            'timeline': project.timeline,
+            'location': project.location,
+            'lon': project.lon,
+            'lat': project.lat,
+            'description': project.description,
+            'county': project.county,
+        }
+        for project in projects
+    ]
+    return jsonify(serialized_projects)
