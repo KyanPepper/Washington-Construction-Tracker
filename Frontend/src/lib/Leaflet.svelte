@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+ 
     import { onMount, onDestroy } from 'svelte';
     import { browser } from '$app/environment';
 
@@ -14,6 +16,7 @@
 	
     onMount(async () => {
         if(browser) {
+            // @ts-ignore
             const leaflet = await import('leaflet');
 			//bounds at washinton
            const washingtonBounds = leaflet.latLngBounds(

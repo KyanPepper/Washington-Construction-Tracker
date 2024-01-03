@@ -1,14 +1,17 @@
 <script>
   import Projectcard from "$lib/projectcard.svelte";
 </script>
-<div class="bg-gradient-to-b from-orange-600 to-yellow-500">
-    <h1 class="text-4xl font-extrabold text-white text-center rounded-lg">
-      Washington Construction Projects
-    </h1>
-    <p class="text-lg text-white text-center mt-4 font-semibold">
-      Window into Washington's Development
-    </p>
+<div class="bg-gradient-to-b from-orange-400 to-yellow-300 py-6">
+  <h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-center text-white">
+    Washington Construction Projects
+  </h1>
+  <p class="text-sm md:text-base text-center mt-2 font-semibold text-white opacity-75">
+    Explore Washington's Latest Developments
+  </p>
 </div>
+
+
+
 
 
 <div>
