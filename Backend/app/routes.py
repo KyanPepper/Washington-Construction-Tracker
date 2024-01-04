@@ -5,7 +5,9 @@ from flask import Flask, jsonify
 from Scraper.main import scrape_all
 import requests
 from sqlalchemy.sql.expression import func
+from flask_cors import CORS
 
+CORS(app)
 
 @app.before_request
 def initDB(*args, **kwargs):
