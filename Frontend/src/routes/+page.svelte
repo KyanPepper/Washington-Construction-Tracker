@@ -7,8 +7,8 @@
     import("./+page").PageData;
   }
   export let data;
-  console.log(data.randomProjects);
  let  rProjects = data.randomProjects
+
 </script>
 
 <div class="bg-gradient-to-b from-orange-400 to-yellow-300 py-6">
@@ -27,7 +27,6 @@
 <div class="flex justify-between pt-4 pb-4 flex-wrap">
   {#each rProjects as project, index (project.id)}
     <Projectcard
-      style="height: 300px; width: 300px;"
       class="w-full sm:w-1/3 bg-white rounded-lg shadow-md p-2 mt-2 project-card"
       price={project.price}
       description={project.description}
