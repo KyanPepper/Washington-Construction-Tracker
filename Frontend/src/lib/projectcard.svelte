@@ -1,12 +1,14 @@
 <script lang="ts">
   import "../app.css";
-  const id: string = "4";
-  const img: string = "src/lib/Logo.png";
-  const price: string = "40 Billion - 50 Billion";
-  const description: string = "this is the project of the ...";
-  const name: string = "Worm project";
-  const timeline: string = "2089 - 2024";
-  const county: string = "Snohomish County";
+  export let id: number;
+  export let lat: number;
+  export let lon: number;
+  export let img: string;
+  export let price: string;
+  export let description: string;
+  export let name: string;
+  export let timeline: string;
+  export let county: string;
 </script>
 
 <div
