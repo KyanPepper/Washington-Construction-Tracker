@@ -22,9 +22,13 @@
   </p>
 </div>
 
-<div>
-  {#each rProjects as project (project.id)}
+
+  
+<div class="flex justify-between pt-4 pb-4 flex-wrap">
+  {#each rProjects as project, index (project.id)}
     <Projectcard
+      style="height: 300px; width: 300px;"
+      class="w-full sm:w-1/3 bg-white rounded-lg shadow-md p-2 mt-2 project-card"
       price={project.price}
       description={project.description}
       name={project.name}
@@ -38,3 +42,6 @@
     ></Projectcard>
   {/each}
 </div>
+
+  
+
