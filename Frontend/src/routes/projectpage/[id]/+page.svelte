@@ -12,7 +12,7 @@ console.log('\n thei')
 </script>
 
 <div>
-  <Projectpage   price={project.price}
+  <Projectpage   price={project[0].price}
   description={project[0].description}
   name={project[0].name}
   img={project[0].img}
