@@ -1,18 +1,20 @@
 <script lang="ts">
     import '../app.css';
-    const id: string = '4';
-    const img: string = 'src/lib/Logo.png';
-    const price: string = '40 Billion - 50 Billion';
-    const description: string = 'this is the project of the blah blah blah blah blah blah blah blah blah blah ';
-    const name: string = 'Worm project';
-    const timeline: string = '2089 - 2024';
-    const url: string = 'github.com/kyanpepper'
-    const lat: GLfloat = 120
-    const lon: GLfloat = -88
-    const county: string = 'Snohomish County'
+  export let id: number;
+  export let lat: number;
+  export let lon: number;
+  export let img: string;
+  export let price: string;
+  export let description: string;
+  export let name: string;
+  export let timeline: string;
+  export let county: string;
+  export let url : string;
+  export let location:string;
+console.log(name)
   </script>
   
-<div class="mx-auto max-w-7xl px-4 pb-4 pt-10 sm:px-6 lg:flex lg:items-start lg:justify-center lg:gap-x-8 lg:px-0 lg:pb-4 lg:pt-16">
+<div class="mx-auto max-w-7xl px-4 pb-4  sm:px-6 lg:flex lg:items-start lg:justify-center lg:gap-x-8 lg:px-0 lg:pb-4 lg:pt-16">
     <!-- Image Section -->
     <div class="lg:w-2/5 lg:pr-6">
         <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
