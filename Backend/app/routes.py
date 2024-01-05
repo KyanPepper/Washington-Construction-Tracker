@@ -83,7 +83,7 @@ def getMapProjects():
     
     return jsonify(serialized_projects)
 
-@app.route('/getproject<projectid>', methods=['GET','POST'])
+@app.route('/getproject/<projectid>', methods=['GET','POST'])
 def getproject(projectid):
     project = Project.query.filter_by(id=projectid).first()
     

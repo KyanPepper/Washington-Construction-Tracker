@@ -8,7 +8,6 @@
   }
   export let data;
  let  rProjects = data.randomProjects
-console.log(rProjects)
 </script>
 
 <div class="bg-gradient-to-b from-orange-400 to-yellow-300 py-6">
@@ -35,6 +34,7 @@ console.log(rProjects)
         lon={project.lon}
         lat={project.lat}
         county={project.county}
+        id={project.id}
       ></Projectcard>
     {/each}
   </div>
