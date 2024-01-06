@@ -1,11 +1,8 @@
 <script lang="ts">
   import "../app.css";
   export let id: number;
-  export let lat: number;
-  export let lon: number;
   export let img: string;
   export let price: string;
-  export let description: string;
   export let name: string;
   export let timeline: string;
   export let county: string;
