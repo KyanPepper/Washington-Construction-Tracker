@@ -172,6 +172,27 @@ def getSpo():
     return jsonify(serialized_projects)
 
 
+@app.route('/getNC', methods=['GET','POST'])
+def getNC():
+    excluded_counties = ['Snohomish County', 'King County', 'Spokane County']
+    projects = Project.query.filter(Project.county.notin_(excluded_counties)).all()
+    serialized_projects = [
+        {
+            'id': project.id,
+            'name': project.name,
+            'img': project.img,
+            'url': project.url,
+            'price': project.price,
+            'timeline': project.timeline,
+            'location': project.location,
+            'lon': project.lon,
+            'lat': project.lat,
+            'description': project.description,
+            'county': project.county,
+        }
+        for project in projects
+    ]
+    return jsonify(serialized_projects)
 
 @app.route('/getrand', methods=['GET','POST'])
 def getRandom():
