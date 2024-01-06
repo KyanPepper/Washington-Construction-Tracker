@@ -8,6 +8,12 @@
   export let county: string;
   export let url : string;
   export let location:string;
+  function nullValue(text: string | null): string {
+  if (text === null || text.toLowerCase().includes('null')) {
+    return '';
+  }
+  return text as string;
+}
   </script>
   
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:flex lg:items-start lg:gap-x-8 lg:px-0 lg:pb-4 lg:pt-16">
@@ -21,8 +27,8 @@
     <!-- Quick Information Section -->
     <div class="lg:w-3/5 lg:pl-6 lg:pr-2">
         <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{name}</h1>
-        <p class="text-xl lg:text-2xl tracking-tight text-gray-900">Area: {county}</p>
-        <p class="text-xl lg:text-2xl tracking-tight text-gray-900">Location: {location}</p>
+        <p class="text-xl lg:text-2xl tracking-tight text-gray-900">{nullValue(county)}</p>
+        <p class="text-xl lg:text-2xl tracking-tight text-gray-900">{nullValue(location)}</p>
         <p class="text-xl lg:text-2xl tracking-tight text-gray-900">Timeline: {timeline}</p>
         <p class="text-xl lg:text-2xl tracking-tight text-gray-900">Estimated Cost: {price}</p>
 
