@@ -58,7 +58,31 @@ def scrapesites():
     db.session.commit()
     return jsonify({"message": "Received data successfully"}),200
 
-from flask import jsonify
+
+
+
+@app.route('/getAll', methods=['GET'])
+def getAllProjects():
+    projects = Project.query.filter().all()
+    
+    serialized_projects = [
+        {
+            'id': project.id,
+            'name': project.name,
+            'img': project.img,
+            'url': project.url,
+            'price': project.price,
+            'timeline': project.timeline,
+            'location': project.location,
+            'lon': project.lon,
+            'lat': project.lat,
+            'description': project.description,
+            'county': project.county,
+        }
+        for project in projects
+    ]
+    
+    return jsonify(serialized_projects)
 
 @app.route('/getmap', methods=['GET'])
 def getMapProjects():
