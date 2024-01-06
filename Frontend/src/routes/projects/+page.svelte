@@ -1,16 +1,35 @@
-<nav class="bg-white shadow flex items-center justify-between p-4 mx-auto max-w-screen-lg font-sans">
-    <div class="flex items-center">
-        <a class="mr-4">Seattle</a>
-        <a class="mr-4">Bellevue</a>
-        <a class="mr-4">Everett</a>
-        <a class="mr-4">Tacoma</a>
-        <a class="mr-4">Spokane</a>
-        <a class="mr-4">Pullman</a>
-        <a class="mr-4">Vancouver</a>
-        <a class="mr-4">Tri Cities</a>
-    </div>
+<script>
+// @ts-nocheck
 
-    <div>
-        <input type="text" placeholder="Search it" class="border px-4 py-2 rounded" />
+  import Projectcard from "$lib/projectcard.svelte";
+  // @ts-ignore
+  {
+    import("./+page").PageData;
+  }
+  export let data;
+ let  rProjects = data.randomProjects
+</script>
+
+
+<div class="mx-auto max-w-screen-lg w-full">
+    <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 justify-center pt-4 pb-4">
+      {#each rProjects as project, index (project.id)}
+        <Projectcard
+          class="bg-white rounded-lg shadow-md p-2 mb-2 mt-2"
+          price={project.price}
+          description={project.description}
+          name={project.name}
+          img={project.img}
+          url={project.url}
+          timeline={project.timeline}
+          location={project.location}
+          lon={project.lon}
+          lat={project.lat}
+          county={project.county}
+          id={project.id}
+        ></Projectcard>
+      {/each}
     </div>
-</nav>
+  </div>
+  
+  

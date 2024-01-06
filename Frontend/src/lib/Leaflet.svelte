@@ -59,7 +59,6 @@
             <img src="${mapProjects[i].img}" style="width: 100%; height: auto;">
             </a>
           </div>`)
-        .openPopup();
     }
     }
   });
