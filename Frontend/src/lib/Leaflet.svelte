@@ -54,9 +54,10 @@
         .marker([mapProjects[i].lat, mapProjects[i].lon])
         .addTo(map)
         .bindPopup( `<div>
-            <a
+            <a href="projectpage/${mapProjects[i].id}">
             <h3>${mapProjects[i].name}</h3>
             <img src="${mapProjects[i].img}" style="width: 100%; height: auto;">
+            </a>
           </div>`)
         .openPopup();
     }
