@@ -6,9 +6,9 @@ export const load: PageLoad = async ({ fetch }) => {
       throw new Error(`Failed to fetch data: ${response.status}`);
     }
     const data = await response.json();
-    return { randomProjects: data };
+    return { allProjects: data };
   } catch (error) {
     console.error('Error fetching random projects during SSR:', error);
-    return { randomProjects: null };
+    return { allProjects: null };
   }
 };

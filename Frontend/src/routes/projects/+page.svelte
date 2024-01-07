@@ -5,14 +5,22 @@
   import { onMount } from "svelte";
 
   export let data;
-  let rProjects = data.randomProjects;
+  let rProjects = data.allProjects;
   let selectedCounty = "All"; 
 
   const filterProjects = () => {
-    if (selectedCounty === "All") {
-      rProjects = data.randomProjects;
+    if (selectedCounty === "Spokane") {
+      rProjects = data.allProjects.filter((/** @type {{ county: string; }} */ project) => project.county == "Spokane County");
+    } else if (selectedCounty === "Snohomish") {
+      rProjects = data.allProjects.filter((/** @type {{ county: string; }} */ project) => project.county == "Snohomish County");
+    } else if (selectedCounty === "King") {
+      rProjects = data.allProjects.filter((/** @type {{ county: string; }} */ project) => project.county == "King County");
+    } else if(selectedCounty === "All"){
+      rProjects = data.allProjects;
     } else {
-      rProjects = data.randomProjects.filter((/** @type {{ county: string; }} */ project) => project.county === selectedCounty);
+      rProjects = data.allProjects.filter((/** @type {{ county: string; }} */ project) => {
+        return project.county !== "King County" && project.county !== "Snohomish County" && project.county !== "Spokane County";
+      });
     }
   };
 
