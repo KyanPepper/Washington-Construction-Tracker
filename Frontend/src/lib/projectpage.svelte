@@ -33,7 +33,9 @@
         <p class="text-xl lg:text-2xl tracking-tight text-gray-900">Estimated Cost: {price}</p>
 
         <!-- See on map -->
-        <button class="mt-2 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-4 text-lg font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">View On Map</button>
+        <a href="{url}">
+        <button class="mt-2 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-4 text-lg font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">View Documentation</button>
+      </a>
     </div>
 </div>
 
@@ -41,7 +43,6 @@
     <div class="text-2xl font-bold text-gray-900">Details</div>
     <div class="text-gray-700">
         <p class="mb-4">{description}</p>
-        <p>See Full Documentation - {url}</p>
     </div>
 </div>
 
