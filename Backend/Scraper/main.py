@@ -5,9 +5,10 @@ def scrape_all():
 
     all_projects = []
 
-    all_projects.extend(scrapesnohomish())
+    
     all_projects.extend(scrapeWsMajor())
     all_projects.extend(scrapelightrail())
+    all_projects.extend(scrapesnohomish())
     
     return all_projects
 

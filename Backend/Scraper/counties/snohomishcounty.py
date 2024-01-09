@@ -36,6 +36,8 @@ def scrapesnohomish():
         else:
             img =broadurl + tempimg[3].get('src')
 
+        if '54873' in img:
+            img = '\src\lib\notfoundlogo.jpg'
         project ={
                 'name' : title,
                 'img' : img,

@@ -25,7 +25,7 @@ def scrapelightrail():
         timeline = '2003 - ' + cells[7].contents[0].strip()
         project ={
                 'name' : title,
-                'img' : broadurl + img,
+                'img' : 'https://www.theurbanist.org/wp-content/uploads/2019/12/Sound-Transit-Map-920x920.jpg',
                 'url' : newurl,
                 'price' : price,
                 'timeline' : timeline,
