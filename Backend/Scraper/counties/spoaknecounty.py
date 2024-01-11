@@ -52,7 +52,10 @@ def scrapeSpokane():
                         funding = text.split(':')[-1].strip()
 
                 if newdiv.find('img') != None:
-                    img = broadurl + newdiv.find('img').get('src')
+                    if(':' in newdiv.find('img').get('src')):
+                        img = newdiv.find('img').get('src')
+                    else:
+                        img = broadurl + newdiv.find('img').get('src')
                 else:
                     img = '\\src\\lib\\notfoundlogo.jpg'
                 project ={
