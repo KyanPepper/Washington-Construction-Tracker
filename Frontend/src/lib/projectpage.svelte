@@ -42,7 +42,7 @@
 <div class="max-w-7xl mx-auto px-4">
     <div class="text-2xl font-bold text-gray-900">Details</div>
     <div class="text-gray-700">
-        <p class="mb-4">{description}</p>
+        <p class="mb-4">{nullValue(description)}</p>
     </div>
 </div>
 

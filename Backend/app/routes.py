@@ -1,3 +1,4 @@
+import atexit
 import sys
 from app import app, db
 from app.models import Project
@@ -6,7 +7,7 @@ from Scraper.main import scrape_all
 import requests
 from sqlalchemy.sql.expression import func
 from flask_cors import CORS
-
+from apscheduler.schedulers.background import BackgroundScheduler
 CORS(app)
 
 @app.before_request
@@ -20,9 +21,17 @@ def testpost():
     response = {"message": "Received data successfully"}
     return jsonify(response), 200
 
+def clear_database():
+    try:
+        db.session.query(Project).delete()
+        db.session.commit()
+    except Exception as e:
+        print(f"Error clearing database: {e}")
+        db.session.rollback()
 
 @app.route("/scrapesites", methods=["POST", "GET"])
 def scrapesites():
+    clear_database()
     url = "https://nominatim.openstreetmap.org/search"
     scrape_projects = scrape_all()
 
@@ -56,6 +65,11 @@ def scrapesites():
                 dbProject.lon = longitude
         db.session.add(dbProject)
     db.session.commit()
+    scheduler = BackgroundScheduler(daemon=True)
+    scheduler.add_job(scrapesites, 'interval', hours=24)
+    scheduler.start()
+    atexit.register(lambda: scheduler.shutdown())
+
     return jsonify({"message": "Received data successfully"}),200
 
 
