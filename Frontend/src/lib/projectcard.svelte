@@ -9,13 +9,16 @@
 
   // Function to truncate text to first 5 words followed by '...'
   function truncateText(text: string): string {
+  if(text === null || text.toLowerCase().includes('null')) {
+    return '...';
+  } 
     const words = text.split(' ');
     if (words.length > 5) {
       return words.slice(0, 5).join(' ') + '...';
     }
     return text;
   }
-  function nullCounty(text: string | null): string {
+  function nullValue(text: string | null): string {
   if (text === null || text.toLowerCase().includes('null')) {
     return '';
   }
@@ -25,14 +28,14 @@
 </script>
 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col w-full">
   <div class="h-48 overflow-hidden rounded-t-lg">
-    <img class="h-full w-full object-cover" src={img} alt={name} />
+    <img class="h-full w-full object-cover" src={img} alt={name} loading="lazy" />
   </div>
 
   <div class="flex-grow p-5 flex flex-col justify-between">
     <div class="flex flex-col h-full">
       <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{name}</h5>
-      <h6 class="mb-2 font-normal text-gray-700 dark:text-gray-400">{nullCounty(county)}</h6>
-      <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">Estimated Cost: {truncateText(price)}</p>
+      <h6 class="mb-2 font-normal text-gray-700 dark:text-gray-400">{nullValue(county)}</h6>
+      <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">Estimated Cost: {(truncateText(price))}</p>
       <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">Timeline: {truncateText(timeline)}</p>
       <div class="flex-grow"></div> 
     </div>

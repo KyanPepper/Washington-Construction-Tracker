@@ -54,7 +54,7 @@ def scrapeSpokane():
                 if newdiv.find('img') != None:
                     img = broadurl + newdiv.find('img').get('src')
                 else:
-                    img = 'src\\lib\\notfoundlogo.jpg'
+                    img = '\\src\\lib\\notfoundlogo.jpg'
                 project ={
                     'name' : title,
                     'img' : img,

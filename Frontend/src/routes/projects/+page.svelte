@@ -33,6 +33,7 @@
   onMount(() => {
     filterProjects();
   });
+ 
 </script>
 
 <nav class="bg-white shadow-md flex justify-center items-center p-4 mx-auto max-w-screen-lg font-sans">

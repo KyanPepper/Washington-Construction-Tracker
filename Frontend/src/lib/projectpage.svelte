@@ -20,7 +20,7 @@
     <!-- Image Section -->
     <div class="lg:w-2/5 lg:pr-6 lg:pl-2">
         <div class="h-72 lg:h-50 overflow-hidden rounded-lg">
-            <img src="{img}" alt="{name}" class="w-full h-full object-cover object-center">
+            <img src="{img}" alt="{name}" class="w-full h-full object-cover object-center" loading="lazy">
         </div>
     </div>
 
@@ -29,8 +29,8 @@
         <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{name}</h1>
         <p class="text-xl lg:text-2xl tracking-tight text-gray-900">{nullValue(county)}</p>
         <p class="text-xl lg:text-2xl tracking-tight text-gray-900">{nullValue(location)}</p>
-        <p class="text-xl lg:text-2xl tracking-tight text-gray-900">Timeline: {timeline}</p>
-        <p class="text-xl lg:text-2xl tracking-tight text-gray-900">Estimated Cost: {price}</p>
+        <p class="text-xl lg:text-2xl tracking-tight text-gray-900">Timeline: {nullValue(timeline)}</p>
+        <p class="text-xl lg:text-2xl tracking-tight text-gray-900">Estimated Cost: {nullValue(price)}</p>
 
         <!-- See on map -->
         <a href="{url}">
