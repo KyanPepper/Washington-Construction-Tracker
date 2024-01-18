@@ -1,26 +1,41 @@
 <script>
-// @ts-nocheck
+  // @ts-nocheck
 
   import Projectcard from "$lib/projectcard.svelte";
   import { onMount } from "svelte";
 
   export let data;
   let rProjects = data.allProjects;
-  let selectedCounty = "All"; 
+  let selectedCounty = "All";
 
   const filterProjects = () => {
     if (selectedCounty === "Spokane") {
-      rProjects = data.allProjects.filter((/** @type {{ county: string; }} */ project) => project.county == "Spokane County");
+      rProjects = data.allProjects.filter(
+        (/** @type {{ county: string; }} */ project) =>
+          project.county == "Spokane County"
+      );
     } else if (selectedCounty === "Snohomish") {
-      rProjects = data.allProjects.filter((/** @type {{ county: string; }} */ project) => project.county == "Snohomish County");
+      rProjects = data.allProjects.filter(
+        (/** @type {{ county: string; }} */ project) =>
+          project.county == "Snohomish County"
+      );
     } else if (selectedCounty === "King") {
-      rProjects = data.allProjects.filter((/** @type {{ county: string; }} */ project) => project.county == "King County");
-    } else if(selectedCounty === "All"){
+      rProjects = data.allProjects.filter(
+        (/** @type {{ county: string; }} */ project) =>
+          project.county == "King County"
+      );
+    } else if (selectedCounty === "All") {
       rProjects = data.allProjects;
     } else {
-      rProjects = data.allProjects.filter((/** @type {{ county: string; }} */ project) => {
-        return project.county !== "King County" && project.county !== "Snohomish County" && project.county !== "Spokane County";
-      });
+      rProjects = data.allProjects.filter(
+        (/** @type {{ county: string; }} */ project) => {
+          return (
+            project.county !== "King County" &&
+            project.county !== "Snohomish County" &&
+            project.county !== "Spokane County"
+          );
+        }
+      );
     }
   };
 
@@ -29,25 +44,47 @@
     filterProjects();
   };
 
- 
   onMount(() => {
     filterProjects();
   });
- 
 </script>
 
-<nav class="bg-white shadow-md flex justify-center items-center p-4 mx-auto max-w-screen-lg font-sans">
+<nav
+  class="bg-white shadow-md flex justify-center items-center p-4 mx-auto max-w-screen-lg font-sans"
+>
   <div class="flex items-center space-x-6">
-    <a on:click={() => handleCountyChange("King")} class="text-black hover:text-blue-500 transition duration-300 ease-in-out">King County</a>
-    <a on:click={() => handleCountyChange("Snohomish")} class="text-black hover:text-blue-500 transition duration-300 ease-in-out">Snohomish County</a>
-    <a on:click={() => handleCountyChange("Spokane")} class="text-black hover:text-blue-500 transition duration-300 ease-in-out">Spokane County</a>
-    <a on:click={() => handleCountyChange("Other")} class="text-black hover:text-blue-500 transition duration-300 ease-in-out">Other</a>
-    <a on:click={() => handleCountyChange("All")} class="text-black hover:text-blue-500 transition duration-300 ease-in-out">All</a>
+    <a
+      on:click={() => handleCountyChange("King")}
+      class="text-black hover:text-blue-500 transition duration-300 ease-in-out"
+      >King County</a
+    >
+    <a
+      on:click={() => handleCountyChange("Snohomish")}
+      class="text-black hover:text-blue-500 transition duration-300 ease-in-out"
+      >Snohomish County</a
+    >
+    <a
+      on:click={() => handleCountyChange("Spokane")}
+      class="text-black hover:text-blue-500 transition duration-300 ease-in-out"
+      >Spokane County</a
+    >
+    <a
+      on:click={() => handleCountyChange("Other")}
+      class="text-black hover:text-blue-500 transition duration-300 ease-in-out"
+      >Other</a
+    >
+    <a
+      on:click={() => handleCountyChange("All")}
+      class="text-black hover:text-blue-500 transition duration-300 ease-in-out"
+      >All</a
+    >
   </div>
 </nav>
 
 <div class="mx-auto max-w-screen-lg w-full">
-  <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 justify-center pt-4 pb-4">
+  <div
+    class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 justify-center pt-4 pb-4"
+  >
     {#each rProjects as project, index (project.id)}
       <Projectcard
         class="bg-white rounded-lg shadow-md p-2 mb-2 mt-2"

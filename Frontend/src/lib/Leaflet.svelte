@@ -21,8 +21,8 @@
         if (!response.ok) {
           throw new Error(`Failed to fetch data: ${response.status}`);
         }
-         mapProjects = await response.json();
-        console.log(mapProjects)
+        mapProjects = await response.json();
+        console.log(mapProjects);
       } catch (error) {
         console.error("Error fetching map projects:", error);
       }
@@ -47,19 +47,16 @@
             '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         })
         .addTo(map);
-        
-    for (let i = 0; i < mapProjects.length; i++) {
-       
-      leaflet
-        .marker([mapProjects[i].lat, mapProjects[i].lon])
-        .addTo(map)
-        .bindPopup( `<div>
+
+      for (let i = 0; i < mapProjects.length; i++) {
+        leaflet.marker([mapProjects[i].lat, mapProjects[i].lon]).addTo(map)
+          .bindPopup(`<div>
             <a href="projectpage/${mapProjects[i].id}">
             <h3>${mapProjects[i].name}</h3>
             <img src="${mapProjects[i].img}" style="width: 100%; height: auto;">
             </a>
-          </div>`)
-    }
+          </div>`);
+      }
     }
   });
 
