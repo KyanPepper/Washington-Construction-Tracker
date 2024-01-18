@@ -8,7 +8,9 @@ import requests
 from sqlalchemy.sql.expression import func
 from flask_cors import CORS
 from apscheduler.schedulers.background import BackgroundScheduler
+
 CORS(app)
+
 
 @app.before_request
 def initDB(*args, **kwargs):
@@ -21,6 +23,7 @@ def testpost():
     response = {"message": "Received data successfully"}
     return jsonify(response), 200
 
+
 def clear_database():
     try:
         db.session.query(Project).delete()
@@ -29,6 +32,7 @@ def clear_database():
         print(f"Error clearing database: {e}")
         db.session.rollback()
 
+
 @app.route("/scrapesites", methods=["POST", "GET"])
 def scrapesites():
     clear_database()
@@ -36,7 +40,7 @@ def scrapesites():
     scrape_projects = scrape_all()
 
     for scrape_project in scrape_projects:
-        #boilerplate
+        # boilerplate
         dbProject = Project()
         dbProject.description = scrape_project.get("description")
         dbProject.name = scrape_project.get("name")
@@ -45,213 +49,216 @@ def scrapesites():
         dbProject.url = scrape_project.get("url")
         dbProject.location = scrape_project.get("location")
         dbProject.timeline = scrape_project.get("timeline")
-        #start logic
+
+        # start logic
         params = {"q": scrape_project.get("location"), "format": "json"}
         response = requests.get(url, params=params)
         if response.status_code == 200:
             data = response.json()
-            if len(data)> 0:
+            if len(data) > 0:
                 latitude = float(data[0].get("lat", 0))
                 longitude = float(data[0].get("lon", 0))
-                if scrape_project.get('county') == None:
+                if scrape_project.get("county") == None:
                     display_name_parts = data[0].get("display_name", "").split(", ")
                     for name in display_name_parts:
-                        if 'County' in name:
+                        if "County" in name:
                             county = name
                             dbProject.county = county
                 else:
-                    dbProject.county = scrape_project.get('county')
+                    dbProject.county = scrape_project.get("county")
                 dbProject.lat = latitude
                 dbProject.lon = longitude
+        dbProject.truncate_values()
         db.session.add(dbProject)
     db.session.commit()
     scheduler = BackgroundScheduler(daemon=True)
-    scheduler.add_job(scrapesites, 'interval', hours=24)
+    scheduler.add_job(scrapesites, "interval", hours=24)
     scheduler.start()
     atexit.register(lambda: scheduler.shutdown())
 
-    return jsonify({"message": "Received data successfully"}),200
+    return jsonify({"message": "Received data successfully"}), 200
 
 
-
-
-@app.route('/getAll', methods=['GET'])
+@app.route("/getAll", methods=["GET"])
 def getAllProjects():
     projects = Project.query.filter().all()
-    
+
     serialized_projects = [
         {
-            'id': project.id,
-            'name': project.name,
-            'img': project.img,
-            'url': project.url,
-            'price': project.price,
-            'timeline': project.timeline,
-            'location': project.location,
-            'lon': project.lon,
-            'lat': project.lat,
-            'description': project.description,
-            'county': project.county,
+            "id": project.id,
+            "name": project.name,
+            "img": project.img,
+            "url": project.url,
+            "price": project.price,
+            "timeline": project.timeline,
+            "location": project.location,
+            "lon": project.lon,
+            "lat": project.lat,
+            "description": project.description,
+            "county": project.county,
         }
         for project in projects
     ]
-    
+
     return jsonify(serialized_projects)
 
-@app.route('/getmap', methods=['GET'])
+
+@app.route("/getmap", methods=["GET"])
 def getMapProjects():
     projects = Project.query.filter(Project.lat.isnot(None)).all()
-    
+
     serialized_projects = [
         {
-            'id': project.id,
-            'name': project.name,
-            'img': project.img,
-            'url': project.url,
-            'price': project.price,
-            'timeline': project.timeline,
-            'location': project.location,
-            'lon': project.lon,
-            'lat': project.lat,
-            'description': project.description,
-            'county': project.county,
+            "id": project.id,
+            "name": project.name,
+            "img": project.img,
+            "url": project.url,
+            "price": project.price,
+            "timeline": project.timeline,
+            "location": project.location,
+            "lon": project.lon,
+            "lat": project.lat,
+            "description": project.description,
+            "county": project.county,
         }
         for project in projects
     ]
-    
+
     return jsonify(serialized_projects)
 
-@app.route('/getproject/<projectid>', methods=['GET','POST'])
+
+@app.route("/getproject/<projectid>", methods=["GET", "POST"])
 def getproject(projectid):
     project = Project.query.filter_by(id=projectid).first()
-    
+
     serialized_projects = [
         {
-            'id': project.id,
-            'name': project.name,
-            'img': project.img,
-            'url': project.url,
-            'price': project.price,
-            'timeline': project.timeline,
-            'location': project.location,
-            'lon': project.lon,
-            'lat': project.lat,
-            'description': project.description,
-            'county': project.county,
+            "id": project.id,
+            "name": project.name,
+            "img": project.img,
+            "url": project.url,
+            "price": project.price,
+            "timeline": project.timeline,
+            "location": project.location,
+            "lon": project.lon,
+            "lat": project.lat,
+            "description": project.description,
+            "county": project.county,
         }
     ]
     return jsonify(serialized_projects)
 
-@app.route('/getsnoho', methods=['GET','POST'])
+
+@app.route("/getsnoho", methods=["GET", "POST"])
 def getSnohomish():
-    projects = Project.query.filter_by(county='Snohomish County').all()
-    
+    projects = Project.query.filter_by(county="Snohomish County").all()
+
     serialized_projects = [
         {
-            'id': project.id,
-            'name': project.name,
-            'img': project.img,
-            'url': project.url,
-            'price': project.price,
-            'timeline': project.timeline,
-            'location': project.location,
-            'lon': project.lon,
-            'lat': project.lat,
-            'description': project.description,
-            'county': project.county,
+            "id": project.id,
+            "name": project.name,
+            "img": project.img,
+            "url": project.url,
+            "price": project.price,
+            "timeline": project.timeline,
+            "location": project.location,
+            "lon": project.lon,
+            "lat": project.lat,
+            "description": project.description,
+            "county": project.county,
         }
         for project in projects
     ]
     return jsonify(serialized_projects)
 
 
-@app.route('/getking', methods=['GET','POST'])
+@app.route("/getking", methods=["GET", "POST"])
 def getKing():
-    projects = Project.query.filter_by(county='King County').all()
-    
+    projects = Project.query.filter_by(county="King County").all()
+
     serialized_projects = [
         {
-            'id': project.id,
-            'name': project.name,
-            'img': project.img,
-            'url': project.url,
-            'price': project.price,
-            'timeline': project.timeline,
-            'location': project.location,
-            'lon': project.lon,
-            'lat': project.lat,
-            'description': project.description,
-            'county': project.county,
+            "id": project.id,
+            "name": project.name,
+            "img": project.img,
+            "url": project.url,
+            "price": project.price,
+            "timeline": project.timeline,
+            "location": project.location,
+            "lon": project.lon,
+            "lat": project.lat,
+            "description": project.description,
+            "county": project.county,
         }
         for project in projects
     ]
     return jsonify(serialized_projects)
 
-@app.route('/getspo', methods=['GET','POST'])
+
+@app.route("/getspo", methods=["GET", "POST"])
 def getSpo():
-    projects = Project.query.filter_by(county='Spokane County').all()
-    
+    projects = Project.query.filter_by(county="Spokane County").all()
+
     serialized_projects = [
         {
-            'id': project.id,
-            'name': project.name,
-            'img': project.img,
-            'url': project.url,
-            'price': project.price,
-            'timeline': project.timeline,
-            'location': project.location,
-            'lon': project.lon,
-            'lat': project.lat,
-            'description': project.description,
-            'county': project.county,
+            "id": project.id,
+            "name": project.name,
+            "img": project.img,
+            "url": project.url,
+            "price": project.price,
+            "timeline": project.timeline,
+            "location": project.location,
+            "lon": project.lon,
+            "lat": project.lat,
+            "description": project.description,
+            "county": project.county,
         }
         for project in projects
     ]
     return jsonify(serialized_projects)
 
 
-@app.route('/getNC', methods=['GET','POST'])
+@app.route("/getNC", methods=["GET", "POST"])
 def getNC():
-    excluded_counties = ['Snohomish County', 'King County', 'Spokane County']
+    excluded_counties = ["Snohomish County", "King County", "Spokane County"]
     projects = Project.query.filter(Project.county.notin_(excluded_counties)).all()
     serialized_projects = [
         {
-            'id': project.id,
-            'name': project.name,
-            'img': project.img,
-            'url': project.url,
-            'price': project.price,
-            'timeline': project.timeline,
-            'location': project.location,
-            'lon': project.lon,
-            'lat': project.lat,
-            'description': project.description,
-            'county': project.county,
+            "id": project.id,
+            "name": project.name,
+            "img": project.img,
+            "url": project.url,
+            "price": project.price,
+            "timeline": project.timeline,
+            "location": project.location,
+            "lon": project.lon,
+            "lat": project.lat,
+            "description": project.description,
+            "county": project.county,
         }
         for project in projects
     ]
     return jsonify(serialized_projects)
 
-@app.route('/getrand', methods=['GET','POST'])
+
+@app.route("/getrand", methods=["GET", "POST"])
 def getRandom():
-   
-    projects =  Project.query .order_by(func.random()).limit(3).all()
-    
+    projects = Project.query.order_by(func.random()).limit(3).all()
+
     serialized_projects = [
         {
-            'id': project.id,
-            'name': project.name,
-            'img': project.img,
-            'url': project.url,
-            'price': project.price,
-            'timeline': project.timeline,
-            'location': project.location,
-            'lon': project.lon,
-            'lat': project.lat,
-            'description': project.description,
-            'county': project.county,
+            "id": project.id,
+            "name": project.name,
+            "img": project.img,
+            "url": project.url,
+            "price": project.price,
+            "timeline": project.timeline,
+            "location": project.location,
+            "lon": project.lon,
+            "lat": project.lat,
+            "description": project.description,
+            "county": project.county,
         }
         for project in projects
     ]
     return jsonify(serialized_projects)
-
